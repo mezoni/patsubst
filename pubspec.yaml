@@ -1,7 +1,7 @@
-name: subst
-version: 0.0.1
+name: patsubst
+version: 0.0.2
 author: Andrew Mezoni <andrew.mezoni@gmail.com>
-description: Text substitution in strings on the wildcard characters.
+description: Pattern based text substitution in strings.
 homepage: https://github.com/mezoni/subst
 dependencies:
   unittest: any

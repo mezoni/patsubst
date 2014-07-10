@@ -1,28 +1,28 @@
 part of subst;
 
-class Subst {
-  final String from;
+class PatSubst {
+  final String pattern;
 
-  final String to;
+  final String replacement;
 
-  Pattern _pattern;
+  RegExp _expression;
 
   List<String> _parts;
 
   List<int> _wildcards;
 
-  Subst(this.from, this.to) {
-    if (from == null) {
-      throw new ArgumentError("from: $from");
+  PatSubst(this.pattern, this.replacement) {
+    if (pattern == null) {
+      throw new ArgumentError("pattern: $pattern");
     }
 
-    if (to == null) {
-      throw new ArgumentError("to: $to");
+    if (replacement == null) {
+      throw new ArgumentError("replacement: $replacement");
     }
 
-    _pattern = _parse(from);
+    _expression = _parse(pattern);
     _wildcards = <int>[];
-    _parts = _split(to);
+    _parts = _split(replacement);
     var length = _parts.length;
     for (var i = 0; i < length; i++) {
       if (_parts[i] == "*") {
@@ -36,7 +36,7 @@ class Subst {
       return null;
     }
 
-    var src = _pattern.matchAsPrefix(text);
+    var src = _expression.matchAsPrefix(text);
     if (src == null) {
       return null;
     }
@@ -57,7 +57,7 @@ class Subst {
     return parts.join();
   }
 
-  Pattern _parse(String text) {
+  RegExp _parse(String text) {
     var parts = _split(text);
     var sb = new StringBuffer("^");
     for (var part in parts) {
