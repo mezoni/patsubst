@@ -42,6 +42,32 @@ class PatSubst {
     }
 
     var length = _wildcards.length;
+    var count = src.groupCount;
+    if (count > length) {
+      count = length;
+    }
+
+    var parts = _parts.toList();
+    for (var i = 1; i < count + 1; i++) {
+      var text = src.group(i);
+      var wildcard = _wildcards[i - 1];
+      parts[wildcard] = text;
+    }
+
+    return parts.join();
+  }
+
+  String replace2(String text) {
+    if (text == null) {
+      return null;
+    }
+
+    var src = _expression.matchAsPrefix(text);
+    if (src == null) {
+      return null;
+    }
+
+    var length = _wildcards.length;
     var groupCount = src.groupCount;
     if (groupCount != length) {
       return null;
