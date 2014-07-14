@@ -25,7 +25,7 @@ class PatSubst {
     _parts = _split(replacement);
     var length = _parts.length;
     for (var i = 0; i < length; i++) {
-      if (_parts[i] == "*") {
+      if (_parts[i] == "%") {
         _wildcards.add(i);
       }
     }
@@ -61,7 +61,7 @@ class PatSubst {
     var parts = _split(text);
     var sb = new StringBuffer("^");
     for (var part in parts) {
-      if (part == "*") {
+      if (part == "%") {
         sb.write("(.*)");
       } else {
         var length = part.length;
@@ -102,7 +102,7 @@ class PatSubst {
 
   List<String> _split(String text) {
     var result = <String>[];
-    var parts = text.split("*");
+    var parts = text.split("%");
     var length = parts.length;
     for (var i = 0; i < length; i++) {
       var part = parts[i];
@@ -112,14 +112,14 @@ class PatSubst {
         }
 
         if (length > 1) {
-          result.add("*");
+          result.add("%");
         }
       } else if (i < length - 1) {
         if (!part.isEmpty) {
           result.add(part);
         }
 
-        result.add("*");
+        result.add("%");
       } else {
         if (!part.isEmpty) {
           result.add(part);
