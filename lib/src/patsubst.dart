@@ -57,7 +57,7 @@ class PatSubst {
     return parts.join();
   }
 
-  List<String> replaceAll(List<String> strings) {
+  List<String> replaceAll(Iterable<String> strings) {
     if (strings == null) {
       return null;
     }
