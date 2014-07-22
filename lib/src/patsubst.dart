@@ -1,8 +1,17 @@
-part of subst;
+part of patsubst;
 
+/**
+ * String pattern substitution.
+ */
 class PatSubst {
+  /**
+   * Input pattern.
+   */
   final String pattern;
 
+  /**
+   * Replacement pattern.
+   */
   final String replacement;
 
   RegExp _expression;

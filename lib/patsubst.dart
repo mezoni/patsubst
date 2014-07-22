@@ -1,3 +1,3 @@
-library subst;
+library patsubst;
 
 part "src/patsubst.dart";
