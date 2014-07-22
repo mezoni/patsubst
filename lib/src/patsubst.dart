@@ -31,12 +31,12 @@ class PatSubst {
     }
   }
 
-  String replace(String text) {
-    if (text == null) {
+  String replace(String string) {
+    if (string == null) {
       return null;
     }
 
-    var src = _expression.matchAsPrefix(text);
+    var src = _expression.matchAsPrefix(string);
     if (src == null) {
       return null;
     }
@@ -57,30 +57,17 @@ class PatSubst {
     return parts.join();
   }
 
-  String replace2(String text) {
-    if (text == null) {
+  List<String> replaceAll(List<String> strings) {
+    if (strings == null) {
       return null;
     }
 
-    var src = _expression.matchAsPrefix(text);
-    if (src == null) {
-      return null;
+    var result = <String>[];
+    for (var string in strings) {
+      result.add(replace(string));
     }
 
-    var length = _wildcards.length;
-    var groupCount = src.groupCount;
-    if (groupCount != length) {
-      return null;
-    }
-
-    var parts = _parts.toList();
-    for (var i = 1; i < groupCount + 1; i++) {
-      var text = src.group(i);
-      var wildcard = _wildcards[i - 1];
-      parts[wildcard] = text;
-    }
-
-    return parts.join();
+    return result;
   }
 
   RegExp _parse(String text) {
