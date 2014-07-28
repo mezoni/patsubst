@@ -1,7 +1,7 @@
 name: patsubst
-version: 0.0.8
+version: 0.0.9
 author: Andrew Mezoni <andrew.mezoni@gmail.com>
 description: Pattern based text substitution in strings.
 homepage: https://github.com/mezoni/subst
-dependencies:
+dev_dependencies:
   unittest: any
